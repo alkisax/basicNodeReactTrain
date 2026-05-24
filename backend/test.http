@@ -1,0 +1,40 @@
+@baseUrl = http://localhost:3001
+@todoId = 6a12dbf789a8d46889710e3f
+
+###
+GET {{baseUrl}}/health
+
+###
+GET {{baseUrl}}/api/ping
+
+###
+GET {{baseUrl}}/todo
+
+###
+POST {{baseUrl}}/todo/create-todo
+Content-Type: application/json
+
+{
+  "todo": "buy milk",
+  "user": "alkis"
+}
+
+###
+GET {{baseUrl}}/todo/user-todos/alkis
+
+###
+GET {{baseUrl}}/todo/{{todoId}}
+
+###
+POST {{baseUrl}}/todo/update-todo/{{todoId}}
+Content-Type: application/json
+
+{
+  "completed": true
+}
+
+###
+POST {{baseUrl}}/todo/delete-todo/{{todoId}}
+
+###
+POST {{baseUrl}}/todo/delete-all-user-todos/alkis
