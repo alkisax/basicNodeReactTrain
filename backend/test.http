@@ -15,7 +15,7 @@ POST {{baseUrl}}/todo/create-todo
 Content-Type: application/json
 
 {
-  "todo": "buy milk",
+  "todo": "learn react",
   "user": "alkis"
 }
 
