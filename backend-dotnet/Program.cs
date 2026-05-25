@@ -9,7 +9,10 @@ builder.Services.AddCors( options =>
   options.AddPolicy("AllowedFrontend", policy =>
   {
     policy
-      .WithOrigins("http://localhost:8081")
+      .WithOrigins(
+        "http://localhost:8081",
+        "http://localhost:5173"
+      )
       .AllowAnyHeader()
       .AllowAnyMethod();
   });
