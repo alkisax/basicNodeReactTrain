@@ -1,10 +1,8 @@
+// frontend\src\components\TodoBootstrapComponent.tsx
 import { useEffect, useState } from "react"
 import { backendUrl } from '../constants/constants'
 import axios from "axios"
-import { Paper, Box, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Table, TextField, Button, Tooltip, IconButton } from "@mui/material"
-import DeleteIcon from '@mui/icons-material/Delete'
-import EditIcon from '@mui/icons-material/Edit'
-import Login from "./Login"
+import LoginBootstrap from "./LoginBootstrap"
 
 type Todo = {
   _id: string
@@ -15,7 +13,7 @@ type Todo = {
   updatedAt?: Date;
 }
 
-const TodoComponent = () => {
+const TodoBootstrapComponent = () => {
   const [todos, setTodos] = useState<Todo[]>([])
   const [user, setUser] = useState<string | null>(null)
   const [usernameInput, setUsernameInput] = useState('')
@@ -82,7 +80,7 @@ const TodoComponent = () => {
 
   if (!user) {
     return (
-      <Login
+      <LoginBootstrap
         handleUsernameSubmit={handleUsernameSubmit}
         usernameInput={usernameInput}
         setUsernameInput={setUsernameInput}
@@ -92,90 +90,86 @@ const TodoComponent = () => {
 
   return (
     <>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '90vh'
-        }}
+      <div
+        className='
+        d-flex
+        justify-content-center
+        align-items-center
+        min-vh-100
+      '
       >
-        <Box
-          sx={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <div>
 
-          <Typography variant="h5" sx={{ mb: 3 }}>
+          <h3 className='mb-3 text-light'>
             {user} todos
-          </Typography>
+          </h3>
 
-          <Typography variant="h6" sx={{ mb: 2 }}>
-            Add new "todo"→
-          </Typography>
-          <TextField
-            value={todoInput}
-            onChange={(e) => setTodoInput(e.target.value)}
-            label='Todo'
-            variant='outlined'
-            size='small'
-            sx={{
-              '& fieldset': {
-                borderColor: 'white',
-              },
-              input: { color: 'white' },
-              label: { color: 'gray' },
-              mb: 2
-            }}
-          />
-          <Button
-            type='submit'
-            onClick={() => handleCreateTodo(todoInput)}
-          >
-            ✔️
-          </Button>
+          <h5 className='mb-2 text-light'>
+            Add new "todo" →
+          </h5>
 
+          <div className='d-flex align-items-center mb-3 gap-2'>
+            <input
+              value={todoInput}
+              onChange={(e) => setTodoInput(e.target.value)}
+              type='text'
+              placeholder='Todo'
+              className='form-control bg-dark text-light border-secondary'
+            />
 
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Todos</TableCell>
-                  <TableCell>UpdatedAt</TableCell>
-                  <TableCell>Actions</TableCell>
-                </TableRow>
-              </TableHead>
+            <button
+              onClick={() => handleCreateTodo(todoInput)}
+              className='btn btn-success'
+            >
+              ✔️
+            </button>
+          </div>
 
-              <TableBody>
+          <div className='table-responsive'>
+            <table className='table table-dark table-striped table-bordered align-middle'>
+
+              <thead>
+                <tr>
+                  <th>Todos</th>
+                  <th>UpdatedAt</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
                 {todos.map((t, i) => (
-                  <TableRow key={i}>
-                    <TableCell>
+                  <tr key={i}>
+
+                    <td>
                       {editingTodoId !== t._id &&
                         t.todo
                       }
+
                       {editingTodoId === t._id &&
-                        <>
-                          <TextField
+                        <div className='d-flex gap-2'>
+                          <input
                             value={editingText}
                             onChange={(e) => setEditingText(e.target.value)}
-                            size='small'
-                            sx={{
-                              input: { color: 'black' },
-                              label: { color: 'gray' },
-                            }}
+                            type='text'
+                            className='form-control'
                           />
-                          <Button
-                            type='submit'
-                            onClick={() => handleEditTodoTextById(t._id, editingText)}
+
+                          <button
+                            onClick={() =>
+                              handleEditTodoTextById(
+                                t._id,
+                                editingText
+                              )
+                            }
+                            className='btn btn-success'
                           >
                             ✔️
-                          </Button>
-                        </>
+                          </button>
+                        </div>
                       }
-                    </TableCell>
-                    <TableCell>
+                    </td>
+
+                    <td>
                       {
                         t.updatedAt
                           ? new Date(t.updatedAt).toLocaleString('el-GR', {
@@ -187,40 +181,49 @@ const TodoComponent = () => {
                           })
                           : ''
                       }
-                    </TableCell>
-                    <TableCell>
-                      <Tooltip title='edit todo'>
-                        <IconButton
+                    </td>
+
+                    <td>
+                      <div className='d-flex gap-2'>
+
+                        <button
+                          className='btn btn-warning btn-sm'
                           onClick={() => {
                             setEditingTodoId(t._id)
                             setEditingText(t.todo)
                           }}
                         >
-                          <EditIcon />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title='Delete todo'>
-                        <IconButton
+                          Edit
+                        </button>
+
+                        <button
+                          className='btn btn-danger btn-sm'
                           onClick={() => handleDeleteTodoById(t._id)}
                         >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </TableCell>
-                  </TableRow>
+                          Delete
+                        </button>
+
+                      </div>
+                    </td>
+
+                  </tr>
                 ))}
-              </TableBody>
+              </tbody>
 
-            </Table>
-          </TableContainer>
+            </table>
+          </div>
 
-          <Button onClick={() => setUser(null)}>
+          <button
+            onClick={() => setUser(null)}
+            className='btn btn-secondary mt-3'
+          >
             Logout
-          </Button>
-        </Box>
-      </Box>
+          </button>
+
+        </div>
+      </div>
     </>
   )
 }
 
-export default TodoComponent
+export default TodoBootstrapComponent

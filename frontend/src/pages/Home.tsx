@@ -8,6 +8,7 @@ const Home = () => {
     <Box
       sx={{
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         minHeight: '90vh'
@@ -33,6 +34,17 @@ const Home = () => {
           </Button>
         </Box>
       </Card>
+
+      <Button
+        onClick={() => navigate('/bootstrap-home')}
+        sx={{
+          fontSize: '0.7rem',
+          padding: '2px 8px',
+          minWidth: 'unset'
+        }}
+      >
+        go to bootstrap mirror
+      </Button>
     </Box>
   )
 }

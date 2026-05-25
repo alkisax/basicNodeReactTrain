@@ -6,3 +6,6 @@ npm create vite@latest frontend
 npm install @mui/material
 npm install @emotion/react @emotion/styled
 npm install @mui/icons-material
+ή
+npm install bootstrap
+main.tsx → import 'bootstrap/dist/css/bootstrap.min.css'
