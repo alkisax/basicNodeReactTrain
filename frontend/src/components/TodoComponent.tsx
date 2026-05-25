@@ -23,12 +23,6 @@ const TodoComponent = () => {
   const [editingTodoId, setEditingTodoId] = useState<string | null>('')
   const [editingText, setEditingText] = useState('')
 
-  const handleUsernameSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault()
-    console.log("user submit", usernameInput);
-    setUser(usernameInput)
-  }
-
   useEffect(() => {
 
     const fetchTodos = async () => {
@@ -43,6 +37,12 @@ const TodoComponent = () => {
     }
     fetchTodos()
   }, [user])
+
+  const handleUsernameSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault()
+    console.log("user submit", usernameInput);
+    setUser(usernameInput)
+  }
 
   const handleCreateTodo = async (todo: string) => {
     console.log(`user: ${user}, todo: ${todo}`);

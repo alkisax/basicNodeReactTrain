@@ -1,7 +1,7 @@
 import Home from "./pages/Home"
 import TodoComponent from "./components/TodoComponent"
 import { Routes, Route } from "react-router-dom";
-import HomeTailwind from "./pages/HomeBootstrap";
+import HomeBootstrap from "./pages/HomeBootstrap";
 import TodoBootstrapComponent from "./components/TodoBootstrapComponent";
 
 const App = () => {
@@ -12,7 +12,7 @@ const App = () => {
         <Route path="/todo" element={<TodoComponent />} />
         <Route path="/bootstrap-todo" element={<TodoBootstrapComponent />} />
         <Route path="/" element={<Home />} />
-        <Route path="/bootstrap-home" element={<HomeTailwind />} /> 
+        <Route path="/bootstrap-home" element={<HomeBootstrap />} /> 
       </Routes>
     </>
   )

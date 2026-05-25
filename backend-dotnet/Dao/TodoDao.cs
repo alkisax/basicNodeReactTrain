@@ -5,7 +5,9 @@ namespace backend_dotnet;
 
 public class TodoDao
 {
+  // Το _db είναι reference προς το EF Core TodoContext
   private readonly TodoContext _db;
+  // Ο constructor παίρνει injected το TodoContext μέσω dependency injection
   public TodoDao(TodoContext db)
   {
     _db = db;

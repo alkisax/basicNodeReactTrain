@@ -3,6 +3,7 @@ using backend_dotnet;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// για να βάζω [required' etc
 builder.Services.AddValidation();
 builder.Services.AddCors( options =>
 {
@@ -18,6 +19,7 @@ builder.Services.AddCors( options =>
   });
 });
 
+// → appsettings.json (env)
 var connString = builder.Configuration.GetConnectionString("TodoDb");
 builder.Services.AddSqlite<TodoContext>(connString);
 
