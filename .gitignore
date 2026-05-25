@@ -1,3 +1,32 @@
+appsettings.Development.json
+# build
+bin/
+obj/
+
+# sqlite
+*.db
+*.db-shm
+*.db-wal
+
+# user/editor
+.vscode/
+.idea/
+
+# logs
+*.log
+
+# environment
+.env
+
+# Rider/ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# OS
+.DS_Store
+Thumbs.db
+
+
 # Logs
 logs
 *.log

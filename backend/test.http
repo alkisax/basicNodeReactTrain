@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3001
-@todoId = 6a12dbf789a8d46889710e3f
+@todoId = 1
 
 ###
 GET {{baseUrl}}/health

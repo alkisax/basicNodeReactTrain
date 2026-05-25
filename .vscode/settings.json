@@ -1,5 +1,8 @@
 {
   "cSpell.words": [
-    "alkis"
-  ]
+    "alkis",
+    "appsettings",
+    "Dtos"
+  ],
+  "dotnet.defaultSolution": "backend-dotnet.slnx"
 }

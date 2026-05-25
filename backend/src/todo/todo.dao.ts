@@ -16,6 +16,7 @@ const create = async (data: Partial<Todo>): Promise<Todo> => {
     throw new Error("Unknown error");
   }
 };
+
 // read
 // read all
 const readAll = async (): Promise<Todo[]> => {
