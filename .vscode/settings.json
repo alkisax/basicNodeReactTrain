@@ -4,5 +4,5 @@
     "appsettings",
     "Dtos"
   ],
-  "dotnet.defaultSolution": "backend-dotnet.slnx"
+  "dotnet.defaultSolution": "dotnet-ai-quoote-generator.slnx"
 }

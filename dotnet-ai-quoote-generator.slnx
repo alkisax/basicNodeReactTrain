@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/dotnet-ai-quote-generator/">
+    <Project Path="dotnet-ai-quote-generator/dotnet-ai-quoote-generator/dotnet-ai-quoote-generator.csproj" />
+  </Folder>
+</Solution>
