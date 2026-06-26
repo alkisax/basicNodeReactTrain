@@ -1,0 +1,37 @@
+using dotnetAiQuoteGenerator;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddValidation();
+builder.Services.AddCors(options =>
+{
+  options.AddPolicy("AllowedFrontend", policy =>
+  {
+    policy
+    .WithOrigins(
+         "http://localhost:8081",
+        "http://localhost:5173"
+    )
+    .AllowAnyHeader()
+    .AllowAnyMethod();
+  });
+});
+
+var app = builder.Build();
+
+app.UseCors("AllowedFrontend");
+app.UseStaticFiles();
+
+app.MapGet("/", () => "Hello World!");
+app.MapGet("/health", () => "ok");
+app.MapGet("/api/ping", () =>
+{
+  Console.WriteLine("someone pinged here");
+  return "Pong";
+});
+
+app.MapAiQuoteEndpoints();
+
+app.Urls.Add("http://localhost:3001");
+
+app.Run();

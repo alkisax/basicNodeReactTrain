@@ -312,3 +312,29 @@ builder.Services.AddScoped<GamesStoreContext>();
 και έπρεπε να αλλάξουμε ολα τα dto να παιρνουν genreId αντι για string Genre
 
 ## async
+
+
+# δικά μου
+## connection with an llm
+```c#
+namespace dotnetAiQuoteGenerator
+{
+  public static class AiQuoteEndpoints
+  {
+    public static void MapAiQuoteEndpoints(this WebApplication app)
+    {
+      var group = app.MapGroup("/generate-ai-quote");
+
+      group.MapGet("/deepseek", () => {});
+    }
+  }
+}
+```
+και στο program βάζουμε
+```c#
+using dotnetAiQuoteGenerator;
+app.MapAiQuoteEndpoints();
+```
+
+τώρα πρέπει να δημιυργήσουμε τον controller που θα πάρει την θέση αυτού () => {} στα endpoints
+
