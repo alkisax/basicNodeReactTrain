@@ -8,3 +8,6 @@ GET http://localhost:3001/generate-ai-quote/deepseek
 
 ### Test real DeepSeek call
 GET http://localhost:3001/generate-ai-quote/deepseek-call
+
+### Read all saved quotes
+GET http://localhost:3001/quotes

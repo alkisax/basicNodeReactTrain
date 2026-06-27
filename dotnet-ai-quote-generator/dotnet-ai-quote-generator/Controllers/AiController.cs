@@ -10,9 +10,11 @@ public class AiController
 {
   // φερνουμε το config απο appsettings
   private readonly IConfiguration _config;
-  public AiController(IConfiguration config)
+  private readonly QuoteDao _quoteDao;
+  public AiController(IConfiguration config, QuoteDao quoteDao)
   {
     _config = config;
+    _quoteDao = quoteDao;
   }
 
   public IResult TestDeepSeek()
@@ -64,6 +66,11 @@ public class AiController
       var response = await client.CompleteChatAsync(
         """
         Return one famous quote as valid JSON only.
+
+        Choose a different historical person each time.
+        Avoid Albert Einstein.
+        Prefer philosophy, literature, politics, science, or art.
+
         The JSON must have exactly this shape:
         {
           "person": "string",
@@ -88,10 +95,21 @@ public class AiController
         }
       );
 
+      if (quote is null)
+      {
+        return Results.BadRequest(new
+        {
+          status = false,
+          message = "AI did not return valid quote JSON"
+        });
+      }
+
+      var savedQuote = await _quoteDao.Create(quote);
+
       return Results.Ok(new
       {
         status = true,
-        quote
+        data = savedQuote
       });
     }
     catch (Exception error)
