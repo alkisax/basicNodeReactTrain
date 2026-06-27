@@ -19,7 +19,12 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<AiController>();
 
+var connString = "Data Source=Quotes.db";
+builder.Services.AddSqlite<QuoteContext>(connString);
+
 var app = builder.Build();
+
+app.MigrateDb();
 
 app.UseCors("AllowedFrontend");
 app.UseStaticFiles();

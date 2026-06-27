@@ -1,6 +1,7 @@
 // dotnet-ai-quote-generator\dotnet-ai-quote-generator\Controllers\AiController.cs
 
 using System.ClientModel;
+using System.Text.Json;
 using OpenAI;
 
 namespace dotnet_ai_quote_generator;
@@ -38,7 +39,6 @@ public class AiController
     {
       Console.WriteLine(error);
       return Results.Problem(error.Message);
-      throw;
     }
   }
 
@@ -62,18 +62,36 @@ public class AiController
 
       var client = openAiClient.GetChatClient("deepseek-chat");
       var response = await client.CompleteChatAsync(
-        "Say hello in one short sentence."
+        """
+        Return one famous quote as valid JSON only.
+        The JSON must have exactly this shape:
+        {
+          "person": "string",
+          "quote": "string",
+          "year": 0
+        }
+
+        Do not include markdown.
+        Do not include explanation.
+        Do not wrap it in ```json.
+        """
       );
 
-      var data = new
-      {
-        reply = response.Value.Content[0].Text
-      };
+      var jsonText = response.Value.Content[0].Text;
+
+      // το ai επιστρέφει με lowercase ενώ εμείς στο Dto έχουμε pascal. χρειαζομαστε deserialize
+      var quote = JsonSerializer.Deserialize<AiQuoteDto>(
+        jsonText,
+        new JsonSerializerOptions
+        {
+          PropertyNameCaseInsensitive = true
+        }
+      );
 
       return Results.Ok(new
       {
         status = true,
-        data
+        quote
       });
     }
     catch (Exception error)
