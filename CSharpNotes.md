@@ -336,5 +336,21 @@ using dotnetAiQuoteGenerator;
 app.MapAiQuoteEndpoints();
 ```
 
-τώρα πρέπει να δημιυργήσουμε τον controller που θα πάρει την θέση αυτού () => {} στα endpoints
+τώρα πρέπει να δημιουργήσουμε τον controller που θα πάρει την θέση αυτού () => {} στα endpoints
+
+στο appsettings.Development.json
+```json
+  "OpenAI": {
+    "ApiKey": "sk-proj-"
+  },
+  "DeepSeek": {
+    "ApiKey": "sk-"
+  }
+```
+
+
+δημιουργούμε \Controllers\AiController.cs
+```c#
+
+```
 

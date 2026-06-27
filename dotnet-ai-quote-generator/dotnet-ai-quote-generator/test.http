@@ -1,0 +1,10 @@
+### Health
+GET http://localhost:3001/health
+
+
+### Test config key exists
+GET http://localhost:3001/generate-ai-quote/deepseek
+
+
+### Test real DeepSeek call
+GET http://localhost:3001/generate-ai-quote/deepseek-call

@@ -1,4 +1,4 @@
-using dotnetAiQuoteGenerator;
+using dotnet_ai_quote_generator;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +16,8 @@ builder.Services.AddCors(options =>
     .AllowAnyMethod();
   });
 });
+
+builder.Services.AddScoped<AiController>();
 
 var app = builder.Build();
 
