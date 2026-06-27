@@ -1,0 +1,28 @@
+### Health
+GET http://localhost:3001/health
+
+
+### Create quote manually
+POST http://localhost:3001/quotes
+Content-Type: application/json
+
+{
+  "person": "Albert Einstein",
+  "quote": "Life is like riding a bicycle. To keep your balance, you must keep moving.",
+  "year": 1930
+}
+
+
+### Read all saved quotes
+GET http://localhost:3001/quotes
+
+
+### Read quote by id
+GET http://localhost:3001/quotes/1
+
+
+### Delete quote by id
+DELETE http://localhost:3001/quotes/1
+
+### Delete all quotes
+DELETE http://localhost:3001/quotes

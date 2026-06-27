@@ -18,6 +18,8 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddScoped<AiController>();
+builder.Services.AddScoped<QuoteDao>();
+builder.Services.AddScoped<QuoteController>();
 
 var connString = "Data Source=Quotes.db";
 builder.Services.AddSqlite<QuoteContext>(connString);
@@ -38,6 +40,7 @@ app.MapGet("/api/ping", () =>
 });
 
 app.MapAiQuoteEndpoints();
+app.MapQuoteEndpoints();
 
 app.Urls.Add("http://localhost:3001");
 
