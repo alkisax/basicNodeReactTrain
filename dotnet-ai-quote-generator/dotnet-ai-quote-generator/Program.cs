@@ -2,6 +2,11 @@ using dotnet_ai_quote_generator;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// for port consistency on Hetzner
+// builder.WebHost.UseUrls(
+//   builder.Configuration["Urls"]!
+// );
+
 builder.Services.AddValidation();
 builder.Services.AddCors(options =>
 {
@@ -13,7 +18,8 @@ builder.Services.AddCors(options =>
         "http://localhost:5173"
     )
     .AllowAnyHeader()
-    .AllowAnyMethod();
+    .AllowAnyMethod()
+    .AllowCredentials();
   });
 });
 
@@ -25,6 +31,7 @@ builder.Services.AddScoped<UserController>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<AuthController>();
 builder.Services.AddScoped<LogFromFrontController>();
+builder.Services.AddSignalR();
 
 var connString = "Data Source=Quotes.db";
 builder.Services.AddSqlite<AppDbContext>(connString);
@@ -36,6 +43,11 @@ var app = builder.Build();
 app.MigrateDb();
 
 app.UseCors("AllowedFrontend");
+
+// signalR
+app.MapHub<RoomHub>("/room");
+Console.WriteLine("🔌 SignalR RoomHub listening on /room");
+
 // αυτα είναι ουσιαστικά τα middleware μου
 app.UseAuthentication();
 app.UseAuthorization();

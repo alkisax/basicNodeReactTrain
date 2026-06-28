@@ -2,7 +2,7 @@
 using System;
 using Microsoft.AspNetCore.SignalR;
 
-namespace backend_dotnet;
+namespace dotnet_ai_quote_generator;
 
 public class RoomHub : Hub
 {
