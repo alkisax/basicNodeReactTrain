@@ -1,0 +1,68 @@
+@baseUrl = http://localhost:3001
+
+### Store token from login response
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFsa2lzIiwicm9sZSI6IkFETUlOIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQURNSU4iLCJleHAiOjE3ODI2Mzc2ODJ9.DYpHmWeW935P95cUic2sPYuaf_Yx2a-6wXnHFyNkXAw
+
+### Health
+GET {{baseUrl}}/health
+
+
+### Register user
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "alkis",
+  "name": "Alkis",
+  "email": "alkis@test.com",
+  "password": "AdminPass1!"
+}
+
+### Promote user to ADMIN
+PUT {{baseUrl}}/users/1/role
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "role": "ADMIN"
+}
+
+### Login user
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "alkis",
+  "password": "AdminPass1!"
+}
+
+### Refresh token
+POST {{baseUrl}}/auth/refresh
+Authorization: Bearer {{token}}
+
+
+### Get all users - AdminOnly
+GET {{baseUrl}}/users
+Authorization: Bearer {{token}}
+
+
+### Get user by id - SelfOrAdmin
+GET {{baseUrl}}/users/1
+Authorization: Bearer {{token}}
+
+
+### Update user - SelfOrAdmin
+PUT {{baseUrl}}/users/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Alkis",
+  "email": "alkisax@gmail.com"
+}
+
+
+### Delete user - SelfOrAdmin
+DELETE {{baseUrl}}/users/1
+Authorization: Bearer {{token}}

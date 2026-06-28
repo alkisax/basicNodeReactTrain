@@ -1,13 +1,18 @@
+### Store token from login response
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFsa2lzIiwicm9sZSI6IkFETUlOIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQURNSU4iLCJleHAiOjE3ODI2MzkxOTl9.QTSqe8jUfClvtbZnYYXKLJS31SXFNV86tdd1dcrNCXI
+
 ### Health
 GET http://localhost:3001/health
-
 
 ### Test config key exists
 GET http://localhost:3001/generate-ai-quote/deepseek
 
-
 ### Test real DeepSeek call
 GET http://localhost:3001/generate-ai-quote/deepseek-call
+
+### Test real DeepSeek call as logged-in user
+GET http://localhost:3001/generate-ai-quote/deepseek-call
+Authorization: Bearer {{token}}
 
 ### Read all saved quotes
 GET http://localhost:3001/quotes

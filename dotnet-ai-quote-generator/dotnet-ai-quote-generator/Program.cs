@@ -20,15 +20,25 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<AiController>();
 builder.Services.AddScoped<QuoteDao>();
 builder.Services.AddScoped<QuoteController>();
+builder.Services.AddScoped<UserDao>();
+builder.Services.AddScoped<UserController>();
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<AuthController>();
 
 var connString = "Data Source=Quotes.db";
-builder.Services.AddSqlite<QuoteContext>(connString);
+builder.Services.AddSqlite<AppDbContext>(connString);
+// ρυθμίζει JWT authentication/authorization διαβάζοντας το JWT_SECRET από config
+builder.Services.AddJwtAuth(builder.Configuration);
 
 var app = builder.Build();
 
 app.MigrateDb();
 
 app.UseCors("AllowedFrontend");
+// αυτα είναι ουσιαστικά τα middleware μου
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseStaticFiles();
 
 app.MapGet("/", () => "Hello World!");
@@ -41,6 +51,8 @@ app.MapGet("/api/ping", () =>
 
 app.MapAiQuoteEndpoints();
 app.MapQuoteEndpoints();
+app.MapAuthEndpoints();
+app.MapUsersEndpoints();
 
 app.Urls.Add("http://localhost:3001");
 
