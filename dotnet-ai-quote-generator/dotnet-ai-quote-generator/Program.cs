@@ -24,6 +24,7 @@ builder.Services.AddScoped<UserDao>();
 builder.Services.AddScoped<UserController>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<AuthController>();
+builder.Services.AddScoped<LogFromFrontController>();
 
 var connString = "Data Source=Quotes.db";
 builder.Services.AddSqlite<AppDbContext>(connString);
@@ -53,6 +54,7 @@ app.MapAiQuoteEndpoints();
 app.MapQuoteEndpoints();
 app.MapAuthEndpoints();
 app.MapUsersEndpoints();
+app.MapLogFromFrontEndpoints();
 
 app.Urls.Add("http://localhost:3001");
 

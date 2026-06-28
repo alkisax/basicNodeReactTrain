@@ -1,0 +1,22 @@
+@baseUrl = http://localhost:3001
+
+### Health
+GET {{baseUrl}}/health
+
+
+### Log from frontend
+POST {{baseUrl}}/api/log-from-front
+Content-Type: application/json
+
+{
+  "data": "Hello from frontend logger test"
+}
+
+
+### Log object as string
+POST {{baseUrl}}/api/log-from-front
+Content-Type: application/json
+
+{
+  "data": "{\"screen\":\"Home\",\"event\":\"button_clicked\",\"userId\":1}"
+}
